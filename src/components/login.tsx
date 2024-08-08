@@ -1,10 +1,11 @@
-import { useFeatureFlag } from "../context/featureFlagContext";
+import FeatureFlag from "./feature-flag";
 import NewLoginPage from "./new-login-page";
 import OldLoginPage from "./old-login-page";
 
 export default function Login() {
-  const { featureFlags } = useFeatureFlag();
   return (
-    <div>{featureFlags.newLoginPage ? <NewLoginPage /> : <OldLoginPage />}</div>
+    <FeatureFlag flag="newLoginPage" fallback={<OldLoginPage />}>
+      <NewLoginPage />
+    </FeatureFlag>
   );
 }
